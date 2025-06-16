@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IST Rolling Clock</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="clock">
+      <div class="column" data-limit="3"></div>   <!-- H1: 0–2 -->
+      <div class="column" data-limit="10"></div>  <!-- H2: 0–9 -->
+      <div class="separator">:</div>
+      <div class="column" data-limit="6"></div>   <!-- M1: 0–5 -->
+      <div class="column" data-limit="10"></div>  <!-- M2: 0–9 -->
+      <div class="separator">:</div>
+      <div class="column" data-limit="6"></div>   <!-- S1: 0–5 -->
+      <div class="column" data-limit="10"></div>  <!-- S2: 0–9 -->
+    </div>
+    <div class="label">Indian Standard Time (IST)</div>
+  </div>
+
+  <script>
+    const columns = document.querySelectorAll(".column");
+
+    columns.forEach((col) => {
+      const limit = parseInt(col.dataset.limit);
+      const strip = document.createElement("div");
+      strip.classList.add("digit-strip");
+
+      for (let i = 0; i < limit; i++) {
+        const span = document.createElement("span");
+        span.textContent = i;
+        strip.appendChild(span);
+      }
+
+      col.appendChild(strip);
+
+      const highlight = document.createElement("div");
+      highlight.classList.add("highlight-ring");
+      col.appendChild(highlight);
+    });
+
+    function updateClock() {
+      fetch("/time")
+        .then((res) => res.json())
+        .then((data) => {
+          const time = data.time;
+          columns.forEach((col, i) => {
+            const digit = parseInt(time[i]);
+            const strip = col.querySelector(".digit-strip");
+            strip.style.transform = `translateY(-${digit * 60}px)`;
+          });
+        });
+    }
+
+    setInterval(updateClock, 1000);
+    window.onload = updateClock;
+  </script>
+</body>
+</html>

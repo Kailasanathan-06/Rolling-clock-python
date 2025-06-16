@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.container {
+  text-align: center;
+  background: #222;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00ffcc66;
+}
+
+.clock {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.separator {
+  color: #00ffcc;
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.label {
+  margin-top: 15px;
+  color: #00ffcc;
+  font-size: 18px;
+}
+
+.column {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #00000033;
+}
+
+.digit-strip {
+  position: absolute;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.digit-strip span {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  height: 60px;
+  line-height: 60px;
+  width: 100%;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.highlight-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.highlight-ring::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 10px #00ffcc88;
+}
