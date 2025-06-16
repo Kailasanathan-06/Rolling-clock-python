@@ -6,7 +6,7 @@
     bash
         pip install flask
 
-3.Run the Flask app:
+3. Run the Flask app:
   bash
     python app.py
     
